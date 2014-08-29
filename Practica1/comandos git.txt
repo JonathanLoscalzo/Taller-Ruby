@@ -1,0 +1,42 @@
+HEAD apunta al ultimo commit del branch en el que estas parado. master es el branch
+
+El comando git clone clona un repositorio Git ya existente. Es parecido a svn checkout.
+git clone git://github.com/schacon/grit.git local-dir
+git add . -> agregar todos los archivos que se quieran commitear
+git add -u -> agrega los archivos deleted
+git reset HEAD <file> -> Deshacer un git add. (********* UNDO DESHACER GIT ADD :  You can also , which will remove it from the current index (the "about to be committed" area) without changing anything else.)
+
+git reset --hard SHA -> volver al commit cuyo hash sha es SHA (hash)- OJO!!
+
+git stash -> los cambios locales se guardan en una pila, para despues volver a usarlos con git stash apply. Permite, por ejemplo, cambiar de branch sin tener que hacer checkout (deshacer) de los archivos o commit.
+git stash apply -> aplica en el branch actual los cambios guardados previamente en la pila.
+
+git checkout <branch name> -> cambio de branch
+git pull <branch> <- trea lo ultimo del repositorio. Es como un svn update.
+git branch <branch name> -> crea un nuevo branch
+git push origin --delete <branch name> -> borra un branch remoto
+git branch -d <the_local_branch> -> remove local branch - borra branch local
+git branch -a -> Muestra tanto los branchs locales como los remotos. shows both remote and local branches.
+git branch -r -> Muestra los branch remotos. Shows remote branches.
+git branch -> Muestra los branch locales. Shows local branches
+git fetch -> Trae los branch nuevos. Cuando un usuario crea un branch remoto, para que lo podamos ver ejecutamos este comando antes de hacer git branch -r
+git branch -m <oldname> <newname> -> Cambiar nombre. Renombre el branch. rename branch If you want to rename the current branch, you can simply do: git branch -m <newname>
+renombrar branches remotos y locales (se borra el remoto y se sube uno nuevo con otro nombre): http://www.benjaminlhaas.com/blog/locally-and-remotely-renaming-branch-git
+
+git commit -m "Mensaje" -> Commit con un mensaje.
+git log origin/master..HEAD -> Ver commits que todavia no fueron pusheados al repositorio remoto (see unpushed commits)
+git commit --amend -m "Nuevo mensaje" -> Cambio el mensaje al ultimo commit
+
+
+git checkout -- . -> Descarta los cambios actuales.
+
+git reset --soft HEAD~1 -> Deshace el ultimo commit. Los cambios no se pierden! undo last commit deshacer ultimo commit.
+
+git status -> Ver archivos modificados
+git log -> log de ultimos commit. Muestra el hash SHA de los commits.
+
+git --version -> Version de git.
+
+git merge <branch> -> mergea el branch <branch> con el actual.
+git merge --abort -> This attempts to reset your working copy to whatever state it was in before the merge. That means that it should restore any uncommitted changes from before the merge, although it cannot always do so reliably.
+git reset --hard HEAD -> Since your pull was unsuccessful then just HEAD is the last "valid" commit on your branch (not HEAD^). Se pierden los cambios
