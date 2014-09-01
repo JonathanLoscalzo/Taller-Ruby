@@ -1,0 +1,12 @@
+class prueba
+
+	def set_foo
+		@foo = 4
+	end
+end
+
+algo = prueba.new
+puts algo.instance_variables
+algo.set_foo
+
+puts algo.instance_variables
