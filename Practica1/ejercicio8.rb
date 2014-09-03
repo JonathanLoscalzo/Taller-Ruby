@@ -19,7 +19,7 @@ total = 0
 x, y = 0, 1
 while true
 	x, y = y, x+y
-	total += x if (x % 2 == 0)
+	total += x if (x.even?)
 	if x > 4000000 
 		break
 	end
