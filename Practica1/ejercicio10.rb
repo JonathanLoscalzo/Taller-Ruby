@@ -13,3 +13,4 @@ más chico que puede ser dividido por cada uno de los números del 1 al 20?
 =end
 
 (1..20).inject(1)  { |mem, var|  mem.lcm(var)} #=> deberìa dar 232792560
+#(1..20).inject(1)  { & :lcm(&)}
