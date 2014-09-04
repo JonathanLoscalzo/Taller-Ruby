@@ -27,3 +27,19 @@ end
 
 puts total
 
+=begin
+#recibe bloque para conocer la secuencia, defino un enumerador, devuelve una secuencia infinita, nunca termina
+fib = Enumerator.new do | block |
+	a,b  = 1,1
+	2.times { block.yield 1}
+	loop do
+		block.yield a+b
+		a,b = b, a+b
+	end
+end
+
+#Ahora si tiene sentido el lazy, nunca termina de ejecutar. Si pones el take_while antes del select eso funciona
+
+fib.lazy.select(&:even?).take_while {|x| x < 4000000}.inject(:+)
+=end
+
