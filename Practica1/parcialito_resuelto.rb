@@ -82,7 +82,7 @@ arreglo_ordenado_por_asistencia =
   }
 
 puts arreglo_ordenado_por_asistencia
-
+# agregar .take(5)
 puts "\n_________________________________________________________\n\n"
 
 #_______________________________________________________
@@ -90,5 +90,6 @@ arreglo_ordenado_por_inasistencia =
   catedra.sort { |a,b| 
     (b[:asistencias].select { | k, v | v == false }.size)  <=> (a[:asistencias].select { | k, v| v == false }.size )
   }
-
+#agregar .take(5)
 puts arreglo_ordenado_por_inasistencia
+
