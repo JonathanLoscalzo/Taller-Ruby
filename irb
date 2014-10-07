@@ -1,0 +1,25 @@
+#!/home/constanza/.rbenv/versions/2.1.3/bin/ruby
+#
+#   irb.rb - interactive ruby
+#   	$Release Version: 0.9.6 $
+#   	$Revision: 40560 $
+#   	by Keiju ISHITSUKA(keiju@ruby-lang.org)
+#
+
+require "irb"
+require 'irb/completion'
+
+
+IRB.conf[:IRB_NAME]="irb"
+IRB.conf[:MATH_MODE]=false
+IRB.conf[:INSPECT_MODE]=nil
+IRB.conf[:IRB_RC] = nil
+IRB.conf[:BACK_TRACE_LIMIT]=16
+IRB.conf[:USE_LOADER] = false
+IRB.conf[:USE_READLINE] = nil
+IRB.conf[:USE_TRACER] = false
+IRB.conf[:IGNORE_SIGINT] = true
+IRB.conf[:IGNORE_EOF] = false
+IRB.conf[:PROMPT_MODE] = :DEFAULT
+IRB.conf[:DEBUG_LEVEL]=0
+IRB.start(__FILE__)
