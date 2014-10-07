@@ -16,29 +16,36 @@ el orden de precedencia de {} es mayor que el de do-end.
 
 def tag(htmlTag, **attrs)
 	content = (block_given?)? yield : ""
-	props = attrs.inject("") { |acum, (k,v) | acum += %Q[ #{k}="#{v}"]}
-	"<#{htmlTag}#{props}>" +content+ "</#{htmlTag}>" 
+	dataElements = (attrs.key?(:data))? attrs.delete(:data) : ""
+	#muy bueno lo del ducktyping. Aqui no importa si es hash o string ambos entienden .empty?
+	unless dataElements.empty?
+		dataElements = dataElements.inject("") { |acum, (k,v)| acum + %Q[ data-#{k}="#{v}"] }
+	end
+	props = attrs.inject("") { |acum, (k,v) | acum + %Q[ #{k}="#{v}"]}
+	"<#{htmlTag}#{props}#{dataElements}>" +content+ "</#{htmlTag}>" 
 end
 
 # permite crear tags sin contenido:
 tag(:input) #=> "<input>"
+
 # permite setear attributos:
-tag(:div, id: 'notification_panel', class: 'alert alert-danger') 
+a = tag(:div, id: 'notification_panel', class: 'alert alert-danger') 
+puts a
 #=> <div id="notification_panel" class="alert alert-danger">
 
 # permite crear tags con contenido. El contenido será obtenido de un bloque
-tag(:div) { "esto es contenido" } #=> <div>esto es contenido</div>
-
+a = tag(:div) { "esto es contenido" } #=> <div>esto es contenido</div>
+puts a
 # De esta manera se puede anidar tags, por ejemplo:
 a = tag(:div, id: 'lista') do
   tag(:ul) do
     tag(:li) { 'un item en una lista'}
   end
 end
-
-=begin
+puts a
 # permite setear attributos data-* de html5
-tag(:input, id: 'id', data: { field: 'value' }) 
+a = tag(:input, id: 'id', data: { field: 'value' }) 
+puts a
 #=> <input id="id" data-field="value">
 
 # De esta manera se puede anidar tags, por ejemplo:
@@ -48,10 +55,9 @@ tag(:div, id: 'lista', data: { toogle: 'true' }) do
   end
 end
 #=> <div id="lista" data-toggle="true"><ul><li> un item en una lista</li></ul></div>
-=end
+=begin	
+________________________________________________________________________________________
 
-=begin
-	
 a. Esta solución permite utilizar todas las clases ruby y sus métodos 
 para generar dinámicamente partes del html. 
 Cómo la usaría para que a partir del siguiente hash:
@@ -70,7 +76,7 @@ Genere una lista de links como la siguiente:
 menu = { google: 'http://google.com', ebay: 'http://ebay.com', facultad: 'http://info.unlp.edu.ar' }
 
 b = tag(:div) do
-	"\n"+tag(:ul) do		
+	"\n"+tag(:ul, data: { toogle: 'true' }) do		
 		menu.inject("") do |mem, (k,v)|  
 			mem + "\n" + tag(:li) { tag(:a, href: v.to_s ) { k.to_s.capitalize } } 
 		end + "\n"
