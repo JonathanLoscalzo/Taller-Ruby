@@ -91,7 +91,8 @@ estado = [] # => [[1,2],[2,3],[4,2]]
 padre = {} # => {[1,2] => [2,3]} padre => hijo.
 distancia = {} #=> {[1,2] => 3} nodo => distancia nodo inicial.
 directions_reverse = { :north => :south, :south=>:north, :east => :west, :west => :east}
-def solve 
+
+def solve(maze) 
 	for row in 0..maze.height do
 		for col in 0..maze.width do
 			estado[[row,col]] = false
@@ -113,12 +114,17 @@ def visit(maze)
 		#por cada direccion valida, avanzo, y recurso.
 		direcciones_vecinos.each do | k,v |  
 			maze.send(v);
-			unless estado[maze.position]
+			if !estado[maze.position]
 				camino[maze.position] = position
-				distancia[maze.position] = distancia[position]+1
+				distancia[maze.position] = distancia[position] + 1
 				visit(maze)
-				maze.send(directions_reverse[v])
+				
+			elsif distancia[maze.position]> distancia[position] + 1
+				distancia[maze.position] = distancia[position] + 1
+				camino[maze.position] = position
 			end
+			maze.send(directions_reverse[v])
+
 	end
 end
 
