@@ -86,47 +86,8 @@ s
 
 =end
 
-cola = []  # => [[1,2],[3,2]]  
-estado = [] # => [[1,2],[2,3],[4,2]] 
-padre = {} # => {[1,2] => [2,3]} padre => hijo.
-distancia = {} #=> {[1,2] => 3} nodo => distancia nodo inicial.
-directions_reverse = { :north => :south, :south=>:north, :east => :west, :west => :east}
 
-def solve(maze) 
-	for row in 0..maze.height do
-		for col in 0..maze.width do
-			estado[[row,col]] = false
-			distancia[[row,col]] = 0
-		end
-	end
 
-	camino[initial_position] = -1 # o nil
-	tiempo = 0
-	visit(initial_position, tiempo, maze)
-
-end
-
-def visit(maze)
-	unless maze.win? do
-		position = maze.position
-		estado[position] = true
-		direcciones_vecinos = directions.select { | k,v | maze.send(k) } 
-		#por cada direccion valida, avanzo, y recurso.
-		direcciones_vecinos.each do | k,v |  
-			maze.send(v);
-			if !estado[maze.position]
-				camino[maze.position] = position
-				distancia[maze.position] = distancia[position] + 1
-				visit(maze)
-				
-			elsif distancia[maze.position]> distancia[position] + 1
-				distancia[maze.position] = distancia[position] + 1
-				camino[maze.position] = position
-			end
-			maze.send(directions_reverse[v])
-
-	end
-end
 
 
 
