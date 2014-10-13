@@ -34,8 +34,8 @@ class Metros < Unidades
 		@valor / 3.2808
 	end
 
-	def metros(valor)
-		valor	
+	def metros
+		@valor	
 	end
 end
 
