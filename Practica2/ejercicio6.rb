@@ -25,6 +25,24 @@ def tag(htmlTag, **attrs)
 	"<#{htmlTag}#{props}#{dataElements}>" +content+ "</#{htmlTag}>" 
 end
 
+#segunda version.
+
+def tag2(htmlTag, **attrs)
+	dataElements = (attrs.key?(:data))? attrs.delete(:data) : {}
+	dataElements = dataElements.inject("") { |acum, (k,v)| acum + %Q[ data-#{k}="#{v}"] } #si no hay nadie, no entra
+	props = attrs.inject("") { |acum, (k,v) | acum + %Q[ #{k}="#{v}"]} #si no hay nadie, no entra
+	"<#{htmlTag}#{props}#{dataElements}>" + ((block_given?)? yield : "")+ "</#{htmlTag}>" 
+end
+
+def tag3(name, **params)
+#esto es de la facu
+	data = params.delete(:data) { |k| Hash.new }
+	par = ''
+	par << ' ' << data.map { |k, v| %(data-#{k}="#{v}") }.join(' ') if data.any?
+	par << ' ' << params.map { |k, v| %(#{k}="#{v}") }.join(' ') if params.any?
+	"<#{name}#{par}>" << ((block_given?)? yield : "") << "</#{name}>" 
+end
+
 # permite crear tags sin contenido:
 tag(:input) #=> "<input>"
 
@@ -74,8 +92,17 @@ Genere una lista de links como la siguiente:
 
 =end
 menu = { google: 'http://google.com', ebay: 'http://ebay.com', facultad: 'http://info.unlp.edu.ar' }
+puts "====================================================================================="
 
-b = tag(:div) do
+b = tag2(:div) do
+	"\n"+tag2(:ul, data: { toogle: 'true' }) do		
+		menu.inject("") do |mem, (k,v)|  
+			mem + "\n" + tag2(:li) { tag2(:a, href: v.to_s ) { k.to_s.capitalize } } 
+		end + "\n"
+	end +"\n"
+end
+
+a = tag(:div) do
 	"\n"+tag(:ul, data: { toogle: 'true' }) do		
 		menu.inject("") do |mem, (k,v)|  
 			mem + "\n" + tag(:li) { tag(:a, href: v.to_s ) { k.to_s.capitalize } } 
@@ -83,4 +110,15 @@ b = tag(:div) do
 	end +"\n"
 end
 
+c = tag3(:div) do
+	"\n"+tag3(:ul, data: { toogle: 'true' }) do		
+		menu.inject("") do |mem, (k,v)|  
+			mem + "\n" + tag3(:li) { tag3(:a, href: v.to_s ) { k.to_s.capitalize } } 
+		end + "\n"
+	end +"\n"
+end
+
+puts a==b && b==c
+puts a
 puts b
+puts c
