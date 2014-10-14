@@ -36,6 +36,16 @@ fib = Enumerator.new do | block |
 	end
 end
 
+#otra version del fib
+
+fib2 = Enumerator.new do |y|
+  a = b = 1
+  loop do
+    y.yield a
+    a, b = b, a + b
+  end
+end
+
 #Ahora si tiene sentido el lazy, nunca termina de ejecutar. Si pones el take_while antes del select eso funciona
 
 fib.lazy.select(&:even?).take_while {|x| x < 4000000}.inject(:+)
