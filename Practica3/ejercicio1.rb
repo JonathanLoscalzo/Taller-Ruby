@@ -1,0 +1,1 @@
+=beginç	Pruebe divisiones por cero con Fixnums y con Floats.=endp 3/0 #=> ZeroDivisionError. Tira una excepcionp 3.0/0 #=> Infinity . Devuelve infinito.
