@@ -18,11 +18,11 @@ d. Dados 2 scores debe ser posible compararlos para saber cuál tiene más punto
  @arr = [['user1', 123], ['user2',23]]
 
 =end
-
+require_relative './score'
+require 'csv'
 
 module ScoreManager
-	require_relative './score'
-	require 'csv'
+	
 	include Enumerable
 	
 	def each(&block)
