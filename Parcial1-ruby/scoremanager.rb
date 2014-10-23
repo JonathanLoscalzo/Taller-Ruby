@@ -32,17 +32,24 @@ module ScoreManager
 	def top_ten
 	#nose porque no ordena  el sort_by, podria sobreescribir array, pero no estaria bueno
 		self.to_s_array self.arreglo.sort { | a,b | a.puntaje <=> b.puntaje }.reverse.first(10)
+# el reverse, aca recorre toda la coleccion.
+# self.to_s_array self.arreglo.sort.last(10).reverse
 		
 	end
 
 	def accumulated_top_ten
 		arr = self.compress #un arreglo con cada usuario y su puntaje total
 		self.to_s_array	arr.sort { | a,b | a.puntaje <=> b.puntaje }.reverse.first(10)
-		
+
 	end
 
 	def top_ten_by_user(username)
 		self.to_s_array self.arreglo.select { |obj| obj.username == username }.sort { | a,b | a.puntaje <=> b.puntaje }.reverse.first(10)
+
+=begin
+	scores.select { |score| score.nombre = "algo_ejemplo" }.sort.last 10	
+=end
+
 	end
 
 	def charge_scores
@@ -56,7 +63,8 @@ module ScoreManager
 		self.arreglo << UsuarioPuntaje.new(user.to_s, puntaje.to_i)
 		#deberia guardarlo en disco tambien
 		f = File.open(self.filename, "a")
-		
+#	pasar puntaje a csv. requerir csv y pasar un arreglo a csv. Definir el metodo en score
+# CSV.open 'archivo.csv', 'w' { |csv| csv << ['1234',1234].to_csv }
 	end
 
 	def to_s
@@ -86,6 +94,10 @@ module ScoreManager
 			end
 		end
 		arreglo_hash.inject([]) { |acum, (k,v)| acum << (UsuarioPuntaje.new(k,v)) }
+=begin
+	arreglo.group_by {| score | score.username }.map { |(k,v)| Score.new k, (v.inject(0){ |acum, score| acum+score.puntaje }) }
+=end
+
 	end
 #	private :compress, :charge_score
 end

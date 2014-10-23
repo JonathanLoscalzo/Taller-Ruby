@@ -26,7 +26,7 @@ puts "========TOP TEN USER BY fernando m. ========="
 
 puts g.top_ten_by_user('fernando m.')
 
-puts "========nuevo usuario ========="
+puts "========nuevo usuario========="
 g.add_score 'NuevoUsuario', 1234234
 
 puts g.top_ten
