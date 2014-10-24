@@ -32,6 +32,9 @@ git checkout -- . -> Descarta los cambios actuales.
 
 git reset --soft HEAD~1 -> Deshace el ultimo commit. Los cambios no se pierden! undo last commit deshacer ultimo commit.
 
+git reset --hard HEAD^ 
+git push -f  -> deshace hasta ese commit, luego pushea y se pierde todo
+
 git status -> Ver archivos modificados
 git log -> log de ultimos commit. Muestra el hash SHA de los commits.
 
