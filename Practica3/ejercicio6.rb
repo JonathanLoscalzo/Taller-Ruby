@@ -29,34 +29,31 @@
 	c3po.tirar_pilas :sdadwe # Lanza una excepción porque el lugar no es válido
 
 =end
-lugares = {:viola => [:mar], :no_viola => [:cesto_reciclables]}
-
-
-lugares.invert.detect { |c,v| c.include? :asdf }
 
 class Robot
+	
 	def atacar(quien)
 		#doble dispatch
 		quien.recibir_ataque self
+		@lugares = {:viola => [:mar], :no_viola => [:cesto_reciclables]}
 	end
 
 	def tirar_pilas(donde)
-		#viola = Hash[(0...lugares[:viola].size).zip lugares[:viola]]
-		#no_viola = x = Hash[(0...lugares[:no_viola].size).zip lugares[:no_viola]]
+		lugar_donde = @lugares.invert.detect() { |c,v| c.include? donde }
 		
-		lugar_donde = lugares.invert.detect { |c,v| c.include? donde }[1]	
-		raise Exception, "Esto viola la ley 0" if lugar_donde == :viola
+		raise Exception, "#{donde} viola la ley 0" if lugar_donde == :viola
+
+		raise Exception, "#{ donde } No machea con ningun sitio. ERROR" if lugar_donde == nil
+
 		puts "#{donde} no viola la ley 0"
 
 	end
 
 	def recibir_ataque(atacante)
 		#recontra trucho.
-		raise Exception, "3era ley incumplida" if atacante.instance_of? Robot
+		raise Exception, "Violando 3ra ley" if atacante == self
 		puts "Recibo ataque de #{atacante}" 
 	end
-
-
 end
 
 class Humano
@@ -67,4 +64,42 @@ class Humano
 	end
 
 end
+=begin
+	luke = Humano.new
+	c3po = Robot.new
+	r2d2 = Robot.new
 
+	c3po.atacar r2d2
+
+	begin
+	c3po.atacar luke 
+	rescue Exception => e
+		puts e
+	end
+
+	begin
+	c3po.atacar c3po 
+	rescue Exception => e
+		puts e
+	end
+
+
+	begin
+	c3po.tirar_pilas :cesto_reciclables 
+	rescue Exception => e
+		puts e
+	end
+
+	begin
+	c3po.tirar_pilas :mar
+	rescue Exception => e
+		puts e
+	end
+
+	begin
+	c3po.tirar_pilas :sdadwe
+	rescue Exception => e
+		puts e
+	end
+=end
+	
