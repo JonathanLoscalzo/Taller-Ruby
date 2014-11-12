@@ -32,6 +32,8 @@
 lugares = {:viola => [:mar], :no_viola => [:cesto_reciclables]}
 
 
+lugares.invert.detect { |c,v| c.include? :asdf }
+
 class Robot
 	def atacar(quien)
 		#doble dispatch
@@ -42,12 +44,16 @@ class Robot
 		#viola = Hash[(0...lugares[:viola].size).zip lugares[:viola]]
 		#no_viola = x = Hash[(0...lugares[:no_viola].size).zip lugares[:no_viola]]
 		
-		viola.fetch(donde)
-		no_viola.fetch(donde) {}
+		lugar_donde = lugares.invert.detect { |c,v| c.include? donde }[1]	
+		raise Exception, "Esto viola la ley 0" if lugar_donde == :viola
+		puts "#{donde} no viola la ley 0"
 
 	end
+
 	def recibir_ataque(atacante)
-		puts "Recibo ataque de #{atacante}"
+		#recontra trucho.
+		raise Exception, "3era ley incumplida" if atacante.instance_of? Robot
+		puts "Recibo ataque de #{atacante}" 
 	end
 
 
@@ -55,8 +61,9 @@ end
 
 class Humano
 	def recibir_ataque(atacante)
-		raise "violando 2da ley" if atacante.instance_of? robot
-		puts "Recibo ataque de #{atacante}"
+		#medio trucho el doble dispatch este jaja
+		raise Exception, "violando 2da ley" if atacante.instance_of? Robot
+		
 	end
 
 end
