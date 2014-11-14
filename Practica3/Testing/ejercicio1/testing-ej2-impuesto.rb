@@ -71,7 +71,6 @@ describe 'funcionamiento de impuesto' do
 		(@impuesto.monto_a_pagar @contr_con_deuda).must_equal 276.0
 	end
 
-
 end
 
 
