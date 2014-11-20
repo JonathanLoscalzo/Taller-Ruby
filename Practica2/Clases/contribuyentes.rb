@@ -9,7 +9,7 @@ La clase Contribuyentes deberá incorporar los comportamientos de Enumerable.
 max, min y sort deberán operar en base a los ingresos del Contribuyente.
 
 =end
-require './contribuyente'
+#require './contribuyente'
 #require_relative 'contribuyente'
 
 # podria ser un singleton.
@@ -40,7 +40,8 @@ class Contribuyentes
 		unless (self.include? contribuyente.cuit)
 			@arr_contr << contribuyente
 		else
-			"contribuyente con cuit #{contribuyente.cuit} duplicado"
+			#, "contribuyente con cuit #{contribuyente.cuit} duplicado"
+			raise Exception
 		end
 	end
 

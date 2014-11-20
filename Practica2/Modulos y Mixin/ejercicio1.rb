@@ -28,32 +28,30 @@ Implementar el método #access de la clase TTPS::Resolving::Scopes de manera que
 
 module TTPS
   CONSTANTE = 10
-
   module Resolving
-    
     CONSTANTE = 5
-
     class Scopes
       def access(number)
-	
         case(number)
-	when (-Float::INFINITY...0)
-		TTPS::Resolving::CONSTANTE * number
-	when (0)
-		::CONSTANTE 
-	when (0..Float::INFINITY) 
-		number * TTPS::CONSTANTE
-	end
+      	when (-Float::INFINITY...0)
+      		TTPS::Resolving::CONSTANTE * number
+      	when (0)
+      		::CONSTANTE 
+      	when (0..Float::INFINITY) 
+      		number * TTPS::CONSTANTE
+      	end
       end
     end
   end
 end
-
 CONSTANTE = 20
 
+=begin
 a = TTPS::Resolving::Scopes.new()
+
 p a.access (-15)
 p a.access (0)
 p a.access (5)
 p TTPS::Resolving::CONSTANTE * -1
+=end
 

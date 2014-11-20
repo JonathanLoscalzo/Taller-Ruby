@@ -1,0 +1,5 @@
+Parte bundler
+
+1. bundle init
+2. para instalar la gema. gem install rubywarrior.
+sino agrego al directorio y pongo bundle install

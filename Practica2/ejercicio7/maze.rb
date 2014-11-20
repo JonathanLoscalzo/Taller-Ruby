@@ -132,7 +132,7 @@ W-+-E
     private
 
     def index_to_coords(index)
-      row = index / (width + 1)
+      row = index/(width + 1)
       col = index % (width + 1)
       [row, col]
     end

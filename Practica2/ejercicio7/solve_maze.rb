@@ -22,7 +22,7 @@ class SolveMaze
 		@camino[@initial_position] = nil # o nil
 		self.visit(maze)
 		self.reconstructPath 
-		p @res
+		@res
 	end
 private
 	def SolveMaze.reconstructPath
