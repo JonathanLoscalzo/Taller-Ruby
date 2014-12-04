@@ -29,6 +29,16 @@ describe 'testing ContactList' do
 
 	end
 
+	it 'must add contact to ContactList and return contact' do
+		contact=Contact.new("test", "test@example.com")
+		( @contactlist << contact ).must_equal contact
+	end
+
+	it 'wont add an non-element contact ' do
+		contact=Object.new
+		->{ @contactlist << contact }.must_raise ArgumentError
+	end
+
 	it 'must return contact find by name ' do 
 	
 		@contactlist.must_be :find_by_name, "name1"

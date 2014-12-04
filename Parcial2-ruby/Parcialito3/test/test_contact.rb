@@ -11,7 +11,7 @@ describe 'Contact test methods ' do
 	end
 
 	it 'to_a must return an array' do
-		@contact.to_a . must_equal ["name", "email@email.com", "12/12/12", "456-4569", "adress"}]
+		@contact.to_a . must_equal ["name", "email@email.com", "12/12/12", "456-4569", "adress"]
 	end
 
 	it 'must be nil with email ok ' do
