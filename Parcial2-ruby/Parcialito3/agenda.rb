@@ -51,6 +51,7 @@ class ContactList
   def <<(contact)
 		raise ArgumentError unless (contact.kind_of? Contact)
     @contacts << contact
+    @contacts.last
   end
 
   # Encontrar un contacto por nombre
