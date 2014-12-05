@@ -1,0 +1,146 @@
+1-curl -X GET http://clima.info.unlp.edu.ar/last?lang -i  
+
+3-
+http://httpkit.com/resources/HTTP-from-the-Command-Line/
+EJEMPLOS DE LA PAGINA
+
+curl -X GET http://echo.httpkit.com/ -i
+
+Esto lo que hace es mandar el json vacio ( no hay nada que leer )
+{
+  "method": "GET",
+  "uri": "/",
+  "path": {
+    "name": "/",
+    "query": "",
+    "params": {}
+  },
+  "headers": {
+    "x-forwarded-for": "181.165.219.97",
+    "host": "echo.httpkit.com",
+    "user-agent": "curl/7.35.0",
+    "accept": "*/*"
+  },
+  "body": null,
+  "ip": "127.0.0.1",
+  "powered-by": "http://httpkit.com",
+  "docs": "http://httpkit.com/echo"
+}
+
+
+curl http://echo.httpkit.com/path?query=string
+le agrega a la propiedad "path" el valor de la query es "query=string"
+{
+  "method": "GET",
+  "uri": "/path?query=string",
+  "path": {
+    "name": "/path",
+    "query": "?query=string",
+    "params": {
+      "query": "string"
+    }
+  },
+  "headers": {
+    "x-forwarded-for": "181.165.219.97",
+    "host": "echo.httpkit.com",
+    "user-agent": "curl/7.35.0",
+    "accept": "*/*"
+  },
+  "body": null,
+  "ip": "127.0.0.1",
+  "powered-by": "http://httpkit.com",
+  "docs": "http://httpkit.com/echo"
+}
+
+
+
+curl -X POST http://echo.httpkit.com/ -i
+{
+  "method": "POST",
+  "uri": "/",
+  "path": {
+    "name": "/",
+    "query": "",
+    "params": {}
+  },
+  "headers": {
+    "x-forwarded-for": "181.165.219.97",
+    "host": "echo.httpkit.com",
+    "user-agent": "curl/7.35.0",
+    "accept": "*/*"
+  },
+  "body": null,
+  "ip": "127.0.0.1",
+  "powered-by": "http://httpkit.com",
+  "docs": "http://httpkit.com/echo"
+}
+
+curl-X POST http://echo.httpkit.com/ -d "{"nombre":"juan", "apellido":"perez"}"
+{
+  "method": "POST",
+  "uri": "/",
+  "path": {
+    "name": "/",
+    "query": "",
+    "params": {}
+  },
+  "headers": {
+    "x-forwarded-for": "181.165.219.97",
+    "host": "echo.httpkit.com",
+    "user-agent": "curl/7.35.0",
+    "accept": "*/*",
+    "content-length": "29",
+    "content-type": "application/x-www-form-urlencoded"
+  },
+  "body": "{nombre:juan, apellido:perez}",
+  "ip": "127.0.0.1",
+  "powered-by": "http://httpkit.com",
+  "docs": "http://httpkit.com/echo"
+}
+
+{
+  "method": "PUT",
+  "uri": "/",
+  "path": {
+    "name": "/",
+    "query": "",
+    "params": {}
+  },
+  "headers": {
+    "x-forwarded-for": "181.165.219.97",
+    "host": "echo.httpkit.com",
+    "user-agent": "curl/7.35.0",
+    "accept": "*/*",
+    "content-length": "29",
+    "content-type": "application/x-www-form-urlencoded"
+  },
+  "body": "{nombre:juan, apellido:perez}",
+  "ip": "127.0.0.1",
+  "powered-by": "http://httpkit.com",
+  "docs": "http://httpkit.com/echo"
+ }
+
+ curl -X PUT http://echo.httpkit.com/ -d "nombre:juan" -d "apellido:perez"
+ {
+   "method": "PUT",
+   "uri": "/",
+   "path": {
+     "name": "/",
+     "query": "",
+     "params": {}
+   },
+   "headers": {
+     "x-forwarded-for": "181.165.219.97",
+     "host": "echo.httpkit.com",
+     "user-agent": "curl/7.35.0",
+     "accept": "*/*",
+     "content-length": "26",
+     "content-type": "application/x-www-form-urlencoded"
+   },
+   "body": "nombre:juan&apellido:perez",
+   "ip": "127.0.0.1",
+   "powered-by": "http://httpkit.com",
+   "docs": "http://httpkit.com/echo"
+ }
+
+
