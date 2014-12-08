@@ -1,0 +1,15 @@
+
+<form action="/question/<%= @id.to_s%>" method="post" >
+	PREGUNTA : <%= @question.to_s %>
+	<br>
+	<hr>
+
+	respuestas:
+	<%= @answers.each_with_index do |obj, i| %>
+	<li>
+		<input type="checkbox" name="checkbox-<%= i %>" >
+		<span><%= obj.to_s %> </span>
+	</li>
+	<%= end %>
+	<button type="submit" > siguiente </button>
+</form>

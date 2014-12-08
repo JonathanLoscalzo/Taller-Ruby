@@ -1,0 +1,16 @@
+
+BIENVENIDO <%= session[:name].to_s %>
+<hr>
+<br>
+#numero de intentos => <%= session[:intentos] %>
+<hr>
+<br>
+#calificacion de cada intento => <%= session[:calificaciones].inject("") { |acum, elem| acum << (elem.to_s + " ")} %>
+<hr>
+<br>
+#calificacion total => <%= calificaciontotal.to_s %>
+<hr>
+<br>
+<a href="./logout"><button>LOGOUT</button></a>
+<a href="/question/0"><button>iniciar cuestionario</button></a>
+</body>
