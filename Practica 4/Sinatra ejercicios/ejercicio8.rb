@@ -124,8 +124,6 @@ get '/question/:number' do | number |
 end
 
 post '/question/:number' do |number|
-	#anotar las correctas o no?.
-	
-
+	#anotar las correctas o no?. params.to_s
 end
 

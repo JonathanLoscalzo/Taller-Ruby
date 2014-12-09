@@ -5,11 +5,11 @@
 	<hr>
 
 	respuestas:
-	<%= @answers.each_with_index do |obj, i| %>
+	<% @answers.each_with_index do |obj, i| -%>
 	<li>
-		<input type="checkbox" name="checkbox-<%= i %>" >
+		<input type="checkbox" name="<%= i %>" >
 		<span><%= obj.to_s %> </span>
 	</li>
-	<%= end %>
+	<% end -%>
 	<button type="submit" > siguiente </button>
 </form>
