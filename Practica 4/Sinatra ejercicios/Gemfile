@@ -1,0 +1,9 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+# gem "rails"
+gem 'sinatra'
+gem "minitest"
+gem "rack-test"
+gem "better_errors"
+gem "binding_of_caller"

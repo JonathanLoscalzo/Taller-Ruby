@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	</head>
+    <body>
+        Action called : <%= @action_name %> at <%= @now %>!
+        Usando helper! : <%= now %>
+
+        
+
+        <br>
+        <hr>
+        un formulario!!!
+        <%= form method:"post", action:"/form" %>
+
+
+        <hr>
+        <br>
+
+        otro formulario
+        <%= @formulario %>
+
+        <%= submit value:"miboton" %>
+        <%= form method:"delete", action:"/form" do 
+			submit value:"boton del form"
+		end %>
+    </body >
+</html >
