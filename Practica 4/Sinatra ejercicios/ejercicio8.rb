@@ -61,21 +61,47 @@ helpers do
 
 	def all_answers
 		[
-			["respuesta1","respuesta2", "respuesta3","respuesta4"],
-			["respuesta1","respuesta2", "respuesta3","respuesta4"],
-			["respuesta1","respuesta2", "respuesta3","respuesta4"],
-			["respuesta1","respuesta2", "respuesta3","respuesta4"],
-			["respuesta1","respuesta2", "respuesta3","respuesta4"]
+			["respuesta11","respuesta12", "respuesta13","respuesta14"],
+			["respuesta21","respuesta22", "respuesta23","respuesta24"],
+			["respuesta31","respuesta32", "respuesta33","respuesta34"],
+			["respuesta41","respuesta42", "respuesta43","respuesta44"],
+			["respuesta51","respuesta52", "respuesta53","respuesta54"]
 		]
 	end
 
 	def all_corrects
-		[[0,1],[1],[2],[1,2,3],[0,1,2,3]]
+		[["0","1"],["1"],["2"],["1","2","3"],["0","1","2","3"]]
+	end
+
+	def verificar_rtas (rtas,number)
+		intento = session[:intentos]
+		#correctas - rtas => nro_correctas
+		nro_correctas = ( all_corrects[number] - rtas ) . count
+		#rtas - correctas => nro_incorrectas
+		nro_incorrectas = (rtas - all_corrects[number]) . count
+		#si hay una respuesta incorrecta, ya no suma. Si respuestas parciales
+		session[:calificaciones][intento] += (nro_correctas / all_corrects[number].count.to_f) if (nro_incorrectas == 0)
+		puts "all_corrects [#{number}] : #{all_corrects[number]}"
+		puts "rtas : #{rtas}"
+		puts "nro_incorrectas : #{nro_incorrectas}"
+		puts "nro_correctas : #{nro_correctas}"
 	end
 
 end
 
 # / y /login permiten a un alumno iniciar una sesión escribiendo su nombre y luego redirigen a la primer pregunta.
+#before '/*/*' do
+#	if !is_logged
+#		erb:loginView
+#	end
+#end
+
+after '/question/:number' do |number|
+	if number.to_i == 5 
+		session[:intentos] += 1
+	end
+end
+
 get '/' do
   redirect to('/login')
 end
@@ -113,7 +139,7 @@ end
 
 #/question/:number muestra la pregunta al alumno, un botón retroceder y un botón de avanzar.
 get '/question/:number' do | number |
-	if is_logged && number.to_i < 5
+	if is_logged && number.to_i < 5 && session[:intentos] < 3
 		@question = all_questions[number.to_i]
 		@answers = all_answers[number.to_i]
 		@id = number.to_i
@@ -125,5 +151,18 @@ end
 
 post '/question/:number' do |number|
 	#anotar las correctas o no?. params.to_s
+	if is_logged && number.to_i < 5 && session[:intentos] < 3
+		#guardar respuestas. quitar parametros "splat"=>[], "captures"=>["0"], "number"=>"0"
+		x = params.clone
+		x.delete("splat")
+		x.delete("captures")
+		x.delete("number")
+		x.keys.to_s
+		verificar_rtas(x.keys, number.to_i)
+		redirect to ('/question/'+ (number.to_i + 1) .to_s)
+	else 
+		redirect to '/login'
+	end
+
 end
 

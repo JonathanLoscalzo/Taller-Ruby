@@ -12,5 +12,7 @@ BIENVENIDO <%= session[:name].to_s %>
 <hr>
 <br>
 <a href="./logout"><button>LOGOUT</button></a>
+<% if session[:intentos] < 3 %>
 <a href="/question/0"><button>iniciar cuestionario</button></a>
+<% end %>
 </body>
